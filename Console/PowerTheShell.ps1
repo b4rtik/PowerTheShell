@@ -81,7 +81,7 @@ function Handle-AVStatus
 { 
    $os = Get-WmiObject -Class Win32_OperatingSystem
    $scope = "localhost"
-   if($os -gt 1)
+   if($os.ProductType -gt 1)
    {
        try
        {
@@ -91,7 +91,7 @@ function Handle-AVStatus
        }
        catch
        {
-            if($os -eq 2)
+            if($os.ProductType -eq 2)
             {
                 Write-host "We are on a Domain Controller but some component are missing run only for localhost"
             }
@@ -102,7 +102,14 @@ function Handle-AVStatus
             $scope = "localhost"
        }   
     }
-   Get-AVStatus -scope $scope 
+    if($scope -eq 'localhost')
+    {
+        Get-AVStatus
+    }
+    else
+    {
+        Get-AVStatus -scope $scope
+    } 
 }
 
 function Handle-Shellcode {
