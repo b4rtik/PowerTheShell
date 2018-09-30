@@ -19,13 +19,12 @@ The main script also performs the necessary commands for protecting our operatio
 
 1. bypass block bypass script by Adam Chester (@_xpn_)
 
-Once the setup phase is over, you can run the console and all its scripts without using any of them
-obfuscation technique. In fact, only the commands necessary for AMSI evasion technique are blurred.
+Once the setup phase is over, you can run the console and all its scripts without using any obfuscation technique. In fact, only the commands necessary for AMSI evasion technique are obfuscated.
 
 This repository contains well-known scripts such as Invoke-Mimikatz Invoke-Powershell Invoke-CrerdentialPhisher that
 they have been patched or customized for easy integration. The actions performed do not compromise the signature of the scripts.
 
-#Instructions
+# Instructions
 
 To start the console run this line
 
