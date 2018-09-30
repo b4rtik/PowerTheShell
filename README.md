@@ -7,7 +7,7 @@ The goal is:
 1. Perform everything in memory without touching the hard disk
 2. Run well-known scripts without being intercepted by the AV
 3. Execute payload meterpreter without being intercepted by the AV
-4. Minimize tracks in EventViewer
+4. Minimize trace in EventViewer
 
 The main script Console-Setup.ps1 performs one of the following AMSI evasion techniques:
 
@@ -17,12 +17,15 @@ The main script Console-Setup.ps1 performs one of the following AMSI evasion tec
 
 The main script also performs the necessary commands for protecting our operational security:
 
-1. bypass block bypass script by Ryan Cobb (@cobbr_io)
+1. Script block logging bypass by Ryan Cobb (@cobbr_io)
 
 Once the setup phase is over, you can run the console and all its scripts without using any obfuscation technique. In fact, only the commands necessary for AMSI evasion technique are obfuscated.
+The command necessary for Script block logging bypass are also obfuscated not for evade AMSI but for not leave trace on EventViewer
+
 
 This repository contains well-known scripts such as Invoke-Mimikatz Invoke-Powershell Invoke-CrerdentialPhisher that
 they have been patched or customized for solving issue and easy integration. The customization performed do not compromise the signature of the scripts.
+In order to 
 
 # Instructions
 
