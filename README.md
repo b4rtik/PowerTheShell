@@ -1,6 +1,6 @@
 # PowerTheShell
 
-This repository was created for teaching / demonstration purposes and is based on a post by <a href="https://twitter.com/_xpn_" rel="nofollow">@<em>xpn</em></a>, more details available <a href="https://www.mdsec.co.uk/2018/06/exploring-powershell-amsi-and-logging-evasion/" rel="nofollow">here</a>..
+This repository was created for teaching / demonstration purposes and is based on a post by <a href="https://twitter.com/_xpn_" rel="nofollow">@<em>xpn</em></a>, more details available <a href="https://www.mdsec.co.uk/2018/06/exploring-powershell-amsi-and-logging-evasion/" rel="nofollow">here</a>.
 
 The goal is:
 
@@ -22,7 +22,7 @@ The main script also performs the necessary commands for protecting our operatio
 Once the setup phase is over, you can run the console and all its scripts without using any obfuscation technique. In fact, only the commands necessary for AMSI evasion technique are obfuscated.
 
 This repository contains well-known scripts such as Invoke-Mimikatz Invoke-Powershell Invoke-CrerdentialPhisher that
-they have been patched or customized for easy integration. The actions performed do not compromise the signature of the scripts.
+they have been patched or customized for solving issue and easy integration. The customization performed do not compromise the signature of the scripts.
 
 # Instructions
 
