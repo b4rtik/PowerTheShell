@@ -25,7 +25,6 @@ The command necessary for Script block logging bypass are also obfuscated not fo
 
 This repository contains well-known scripts such as Invoke-Mimikatz Invoke-Powershell Invoke-CrerdentialPhisher that
 they have been patched or customized for solving issue and easy integration. The customization performed do not compromise the signature of the scripts.
-In order to 
 
 # Instructions
 
