@@ -17,7 +17,7 @@ The main script Console-Setup.ps1 performs one of the following AMSI evasion tec
 
 The main script also performs the necessary commands for protecting our operational security:
 
-1. bypass block bypass script by Adam Chester (@_xpn_)
+1. bypass block bypass script by Ryan Cobb (@cobbr_io)
 
 Once the setup phase is over, you can run the console and all its scripts without using any obfuscation technique. In fact, only the commands necessary for AMSI evasion technique are obfuscated.
 
