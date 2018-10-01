@@ -153,10 +153,8 @@
     $CloseHandleAddr = Get-ProcAddress kernel32.dll CloseHandle
     $CloseHandleDelegate = Get-DelegateType @([IntPtr]) ([Bool])
     $CloseHandle = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer($CloseHandleAddr, $CloseHandleDelegate)
-    
-    Write-Verbose "Injecting shellcode into PID: $ProcessId"
         
-    write-host "Injecting shellcode injecting into $((Get-Process -Id $ProcessId).ProcessName) ($ProcessId)!"
+    write-host "Injecting shellcode $((Get-Process -Id $ProcessId).ProcessName) ($ProcessId)!"
     Inject-RemoteShellcode $ProcessId
 
 }
