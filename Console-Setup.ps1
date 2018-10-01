@@ -4,7 +4,7 @@ try
         Write-host " "
         $pathk = "HKLM:\Software\Policies\Microsoft\Windows\PowerShell\Scr"+"iptB"+"lockLo"+"gging"
 
-	    $value = Get-ItemProperty -Path $pathk | Select-Object -ExpandProperty 'EnableScriptBlockLogging' -ErrorAction Stop
+	    $value = Get-ItemProperty -Path $pathk -ErrorAction Stop | Select-Object -ExpandProperty 'EnableScriptBlockLogging' -ErrorAction Stop
 	    if($value -ne 1)
         {
             throw "Script block logging not enabled"
