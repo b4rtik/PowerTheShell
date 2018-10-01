@@ -79,37 +79,7 @@ function PowerTools
 
 function Handle-AVStatus 
 { 
-   $os = Get-WmiObject -Class Win32_OperatingSystem
-   $scope = "localhost"
-   if($os.ProductType -gt 1)
-   {
-       try
-       {
-            Get-ADComputer | out-null
-            Write-host "" 
-            $scope = Read-Host -Prompt '(Invoke-Shellcode) scope'
-       }
-       catch
-       {
-            if($os.ProductType -eq 2)
-            {
-                Write-host "We are on a Domain Controller but some component are missing run only for localhost"
-            }
-            else
-            {
-                Write-host "We are on a Server but some component are missing run only for localhost"
-            }
-            $scope = "localhost"
-       }   
-    }
-    if($scope -eq 'localhost')
-    {
-        Get-AVStatus
-    }
-    else
-    {
-        Get-AVStatus -scope $scope
-    } 
+   Get-AVStatus 
 }
 
 function Handle-Shellcode {
