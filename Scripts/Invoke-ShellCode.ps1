@@ -155,7 +155,7 @@ http://www.exploit-monday.com
 
 [CmdletBinding( DefaultParameterSetName = 'RunLocal', SupportsShouldProcess = $True , ConfirmImpact = 'High')] Param (
     [ValidateNotNullOrEmpty()]
-    [UInt16]
+    [UInt32]
     $ProcessID,
     
     [Parameter( ParameterSetName = 'RunLocal' )]
