@@ -1,4 +1,4 @@
-#@cobbr_io script block logging bypass
+
 
 function AV-Bypass-Setup
 <#
