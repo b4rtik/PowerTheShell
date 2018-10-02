@@ -13,6 +13,23 @@ function AV-Bypass-Setup
 	C:\PS> AV-Bypass-Setup
 #>
 { 
+
+	write-host " "
+        write-host "Test ScriptBlockLogging"
+
+        $log = Get-WinEvent -filterhashtable @{logname="Microsoft-Windows-PowerShell/Operational";id=4104} -erroraction 'silentlycontinue' | Where {$_.Message -like "*Test ScriptBlockLogging*"}
+        if($log -eq $null)
+        {							
+	        Write-host " "
+	        Write-host "Script block logging bypass executed successfully"
+        }
+        else
+        {							
+	        Write-host " "
+	        Write-host "Error executing Script block logging bypass. Exit "
+            return
+        }
+
 	Write-host ""
 	Write-host "AMSI evasion technique: "
 	Write-host ""
