@@ -26,7 +26,7 @@ function AV-Bypass-Setup
         else
         {							
 	        Write-host " "
-	        Write-host "Error executing Script block logging bypass. Exit "
+	        Write-host "Error executing Script block logging bypass"
         }
 
 	Write-host ""
