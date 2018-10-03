@@ -757,7 +757,7 @@ http://www.exploit-monday.com
     }   
 }
 
-function Invoke-Shellcode
+function Invoke-Mycode
 {
     [CmdletBinding()]
     param (
