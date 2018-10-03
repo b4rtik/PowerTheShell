@@ -30,4 +30,4 @@ they have been patched or customized for solving issue and easy integration. The
 
 To start the console run this line
 
-powershell -Execution bypass "iex((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/b4rtik/PowerTheShell/master/Console-Setup.ps1'))"
+powershell -Execution bypass "iex((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/b4rtik/PowerTheShell/master/Setup.ps1'))"
