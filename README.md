@@ -20,7 +20,7 @@ The main script also performs the necessary commands for protecting our operatio
 1. Script block logging bypass by Ryan Cobb (@cobbr_io)
 
 Once the setup phase is over, you can run the console and all its scripts without using any obfuscation technique. In fact, only the commands necessary for AMSI evasion technique are obfuscated.
-The command necessary for Script block logging bypass are also obfuscated not for evade AMSI but for not leave trace on EventViewer ('ScriptBlockLogging' can be found in the variable 'Scriptblock.signatures' ). 
+The command necessary for Script block logging bypass are also obfuscated not for evade AMSI but for leave minimum trace on EventViewer. 
 
 
 This repository contains well-known scripts such as Invoke-Mimikatz Invoke-Powershell Invoke-CrerdentialPhisher that
