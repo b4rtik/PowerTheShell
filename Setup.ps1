@@ -1,10 +1,10 @@
 try 
 {
 	Write-host " "
-        $ErrorActionPreference = "SilentlyContinue";
+        #$ErrorActionPreference = "SilentlyContinue";
         $pathk = "HKLM:\Software\Policies\Microsoft\Windows\PowerShell\Scr"+"iptB"+"lockLo"+"gging"
 	
-	    $value = Get-ItemProperty -Path $pathk -erroraction SilentlyContinue | Select-Object -ExpandProperty "EnableSc"+"riptBlockLogging" 
+	    $value = Get-ItemProperty -Path $pathk -erroraction SilentlyContinue | Select-Object -ExpandProperty "EnableScriptBlockLogging" 
 	    if($value -ne 1)
         {
             throw "Script block logging not enabled"
