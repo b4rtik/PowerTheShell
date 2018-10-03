@@ -9,7 +9,7 @@ The goal is:
 3. Execute payload meterpreter without being intercepted by the AV
 4. Minimize trace in EventViewer
 
-The main script Setup.ps1 performs the necessary commands for protecting our operational security:
+The main script Setup.ps1 performs the necessary commands for protecting our operational security (not entirely):
 
 1. Script block logging bypass by Ryan Cobb (@cobbr_io)
 
