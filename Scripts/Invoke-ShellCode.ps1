@@ -764,7 +764,7 @@ function Invoke-Mycode
         [ValidateNotNullOrEmpty()]
         [UInt32]
         $ProcessID,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $false)]
         [string]
         $Payload = 'windows/meterpreter/reverse_https',
         [Parameter(Mandatory = $true)]
