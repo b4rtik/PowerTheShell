@@ -23,7 +23,7 @@ Once the setup phase is over, you can run the console and all its scripts withou
 The command necessary for Script block logging bypass are also obfuscated not for evade AMSI but for leave minimum trace on EventViewer. 
 
 This repository contains well-known scripts such as Invoke-Mimikatz Invoke-Powershell Invoke-CrerdentialPhisher that
-they have been patched or customized for solving issue and easy integration. The customization performed do not compromise the signature of the scripts.
+they have been patched or customized for solving issue and easy integration. 
 
 # Instructions
 
