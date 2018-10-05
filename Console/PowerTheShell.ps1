@@ -87,7 +87,7 @@ function Handle-Shellcode {
    }
 
    $lport = Read-Host -Prompt '(Invoke-Shellcode) lport'
-   while ($lhost -NotIn 1..65535) 
+   while ($lhost -gt 0 -and $lhost -lt 65536) 
    {
         $lport = Read-Host -Prompt '(Invoke-Shellcode) lport'
    }
