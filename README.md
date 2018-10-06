@@ -22,7 +22,7 @@ The main script Setup.ps1 plus AMSI-Setup.ps1 performs one of the following AMSI
 Once the setup phase is over, you can run the console and all its scripts without using any obfuscation technique. In fact, only the commands necessary for AMSI evasion technique are obfuscated.
 The command necessary for Script block logging bypass are also obfuscated not for evade AMSI but for leave minimum trace on EventViewer. 
 
-This repository contains well-known scripts such as Invoke-Mimikatz Invoke-Powershell Invoke-CrerdentialPhisher that
+This repository contains well-known scripts such as Invoke-Mimikatz Invoke-Shellcode Invoke-CrerdentialPhisher that
 they have been patched or customized for solving issue and easy integration. 
 
 # Instructions
